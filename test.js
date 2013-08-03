@@ -3,28 +3,27 @@ var should = require('should'),
   Schema = mongoose.Schema,
   timestamps = require('./index');
 
-var userSchema = new Schema({
-  name: String
-}, { safe: true });
-userSchema.plugin(timestamps);
-var User = mongoose.model('User', userSchema);
-
 describe("mongoose-concrete-timestamps", function () {
-  it("should add a createdAt timestamp on creation", function (done) {
+  var userSchema = new Schema({
+    name: String
+  }, { safe: true });
+  userSchema.plugin(timestamps);
+  var User = mongoose.model('User', userSchema);
+  it("should add a createdAt timestamp on creation", function () {
     var user = new User({ name: "foobar" });
     user.save(function (err, user) {
-      if (err) { throw(err); }
+      if (err) { console.log(err); throw(err); return done(err); }
+      console.log(user);
       should.exist(user.createdAt);
-      done();
     });
   });
   
-  it("should add an updatedAt timestamp after saving", function (done) {
+  it("should add an updatedAt timestamp after saving", function () {
     var user = new User({ name: "foobar" });
     user.save(function (err, user) {
-      if (err) { throw(err); }
+      if (err) { throw(err); return done(err); }
+      console.log(user);
       should.exist(user.updatedAt);
-      done();
     });
   });
 });
