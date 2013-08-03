@@ -1,10 +1,15 @@
 exports = module.exports = function concreteTimestamps(schema, options) {
+  schema.add({
+    createdAt: Date,
+    updatedAt: Date
+  });
+  
   schema.pre('save', function (next) {
     if (this.isNew) {
       this.createdAt= new Date();
-    } else {
-      this.updatedAt = new Date();
     }
+    
+    this.updatedAt = new Date();
     next();
   });
 };
