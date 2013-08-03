@@ -1,0 +1,27 @@
+{
+  "name": "mongoose-concrete-timestamps",
+  "version": "0.1.0",
+  "author": "Austin Pocus <ajpocus@gmail.com>",
+  "description": "Save concrete, non-virtual timestamps to your Mongoose models.",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ajpocus/mongoose-concrete-timestamps.git"
+  },
+  "keywords": [
+    "mongoose",
+    "timestamps"
+  ],
+  "dependencies" : {
+    "mongoose": "3.x",
+    "underscore": "latest"
+  },
+  "devDependencies": {
+    "mocha": "1.x",
+    "should": "1.x"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10"
+  }
+}
