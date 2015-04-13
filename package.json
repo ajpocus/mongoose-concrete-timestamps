@@ -1,6 +1,6 @@
 {
   "name": "mongoose-concrete-timestamps",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Austin Pocus <ajpocus@gmail.com>",
   "description": "Save concrete, non-virtual timestamps to your Mongoose models.",
   "main": "./index.js",
@@ -10,6 +10,8 @@
   },
   "keywords": [
     "mongoose",
+    "database",
+    "plugin",
     "timestamps"
   ],
   "dependencies": {
