@@ -4,26 +4,54 @@ var should = require('should'),
   timestamps = require('./index');
 
 describe("mongoose-concrete-timestamps", function () {
-  var userSchema = new Schema({
-    name: String
-  }, { safe: true });
-  userSchema.plugin(timestamps);
-  var User = mongoose.model('User', userSchema);
-  it("should add a createdAt timestamp on creation", function () {
+  var db
+  var User
+
+  before(function(done){
+    mongoose.connect('mongodb://localhost/test')
+    db = mongoose.connection
+    db.on('error', done)
+    db.on('open', function(){done()})
+  })
+
+  before(function(){
+    var userSchema = new Schema({name: String}, {safe: true})
+    userSchema.plugin(timestamps);
+    User = mongoose.model('User', userSchema);
+  })
+
+  it("should add a createdAt timestamp on creation", function (done) {
     var user = new User({ name: "foobar" });
     user.save(function (err, user) {
-      if (err) { console.log(err); throw(err); return done(err); }
-      console.log(user);
+      should(err).not.be.ok
       should.exist(user.createdAt);
+      done(err)
     });
   });
   
-  it("should add an updatedAt timestamp after saving", function () {
+  it("should add an updatedAt timestamp after saving", function (done) {
     var user = new User({ name: "foobar" });
     user.save(function (err, user) {
-      if (err) { throw(err); return done(err); }
-      console.log(user);
+      should(err).not.be.ok
       should.exist(user.updatedAt);
+      done(err)
     });
+  });
+
+  it("shouldn't override an explicitly set value for createdAt", function (done) {
+    var user = new User({ name: "foobar" });
+    var date = user.createdAt = new Date()
+    this.timeout(0)
+    setTimeout(saveUser, 200)
+
+    //-------------
+    function saveUser(){
+      user.save(function (err, user){
+        should(err).not.be.ok
+        should.exist(user.createdAt)
+        should.equal(user.createdAt.valueOf(), date.valueOf())
+        done(err)
+      });
+    }
   });
 });
