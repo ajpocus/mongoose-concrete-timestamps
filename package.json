@@ -12,16 +12,16 @@
     "mongoose",
     "timestamps"
   ],
-  "dependencies" : {
-    "mongoose": "3.x",
-    "underscore": "latest"
+  "dependencies": {
+    "mongoose": "^4.0.1",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "mocha": "1.x",
-    "should": "1.x"
+    "mocha": "^2.2.4",
+    "should": "^5.2.0"
   },
   "license": "MIT",
   "engines": {
-    "node": ">=0.10"
+    "node": ">= 0.12"
   }
 }

@@ -17,7 +17,7 @@ describe("mongoose-concrete-timestamps", function () {
       should.exist(user.createdAt);
     });
   });
-  
+
   it("should add an updatedAt timestamp after saving", function () {
     var user = new User({ name: "foobar" });
     user.save(function (err, user) {
